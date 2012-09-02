@@ -1,0 +1,31 @@
+<?php
+	echo "<ul>";
+	for($i = 0, $n = count($items['Item']), $t = null; $i < $n;	$i++){
+		$tmp = $items['Item'][$i];
+		if ($t != $tmp['parent_id']){
+			if ($t != null){
+				echo "</ul></li>";
+			}
+			$t = $tmp['parent_id'];
+			echo "<li>";
+			if ( isset($tmp['parent_name']) ){
+				echo $tmp['parent_name'];
+			} else if ($t == 0){
+				echo 'root';
+			} else {
+				echo 'empty';
+			}
+			echo "<ul>";
+		}
+		echo "<li>".$tmp['name']."</li>";
+	}
+	echo "</ul>";
+?>
+<script>
+	function changePicture(__this){
+		__this.src=__this.src.replace(/\d(?=\.)/,function(str, offset, s){
+			 return (str == 1) ? 2 : 1;
+		});
+	}
+</script>
+<img src="/img/picture1.jpg" width="100px" height="100px" name="myPicture" onClick="changePicture(this)">

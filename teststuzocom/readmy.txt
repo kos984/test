@@ -1,0 +1,29 @@
+@author kos
+
+>>> Use MVC design pattern and write code which prints tree hierarchy. Do not use any framework. Ensure that you write clean, optimized and documented code.
+
+to create new page you should:
+	- create Controller in /app/Controller/YourController.php and extend from Controller class
+	- set uses Model
+	- if Model do not describe yet : create Model in /app/Model/YourModel.php and extent from Model class
+	- create action in you Controller | function function index; 
+		All action should be public !
+	- create folder in /app/View/YouControllerName/YourActionName.tp
+	
+	in controller you can :
+	- change layout | $this->layout = yourLayout | in folder /app/View/Layouts/yourLayout.tp
+	- set variables for view
+	
+
+When a user clicks on the following image, it changes from picture1.gif to picture2.gif. Please define the function changePicture().
+
+<img src=”picture1.gif” name=”myPicture” onClick=”changePicture()”>
+
+
+done pages: 
+	localhost/item/index/
+	
+
+	INSTALATION:
+- copy .htaccess
+- copy all folders :)

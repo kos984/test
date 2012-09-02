@@ -1,0 +1,36 @@
+<?php
+
+	$tmp = array();
+	foreach($items['Item'] as $k=>$v){
+		$tmp[ $v['parent_id'] ][] = array('id'=>$v['id'],'name'=>$v['name']);
+	}
+?>
+<style>
+	svg {width:900px; height:400px;}
+	svg path {stroke:#FF0000; stroke-width:1px; fill:none;}
+</style>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <g font-family='Verdana' font-size='12' fill='blue' >
+	<?php
+		$x = 30;
+		$y = 10;
+		$h;
+		foreach($tmp as $k => $v){
+		
+			echo "<path d='m 5,".($y-5)." ".($x-10).",0' />";
+			echo "<text x='$x' y='$y'>".(($k == 0)?'root':'name '.$k)."</text>";
+			$h = count($v)*20;
+			echo "<path d='m ".($x+10).",".($y+5)." 0,$h' />";
+			foreach($v as $key=>$value){
+				$y += 20;
+
+				echo "<path d='m ".($x+10).",".($y+5)." 80,0' />";
+				echo "<text x='".($x+20)."' y='$y'>".$value['name']."</text>";
+			}
+		$y += 20;
+		}
+
+		echo "<path d='m 5,0 0,".($y-$h-25)."' />";
+	?>
+	</g>
+</svg>

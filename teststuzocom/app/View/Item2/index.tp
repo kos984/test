@@ -1,0 +1,58 @@
+<?php
+
+	$tmp = array();
+	foreach($items['Item'] as $k=>$v){
+		$tmp[ $v['parent_id'] ][] = array('id'=>$v['id'],'name'=>$v['name']);
+	}
+?>
+<style>
+	svg {width:900px; height:400px;}
+	svg path {stroke:#FF0000; stroke-width:1px; fill:none;}
+</style>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <g font-family='Verdana' font-size='12' fill='blue' >
+	<?php
+		$x = 20;
+		$y = 100;
+		$coor = array();
+		foreach($tmp as $k => $v){
+			$text = (($k == 0)?'root':'name '.$k);
+			echo "<text x='$x' y='$y'>$text</text>";
+			$y1 = $y + 20;
+			
+			$maxlen = strlen($text);
+			
+			$coor[] = array($x+20,$y-10); // x, y
+			
+			foreach($v as $key=>$value){
+				$y1 += 20;
+
+				echo "<path d='m ".($x+10).",".($y1+5)." 60,0' />";
+				echo "<text x='".($x+20)."' y='$y1'>".$value['name']."</text>";
+				
+				$tmp = strlen($value['name']);
+				if ($tmp > $maxlen) {
+					$maxlen = $tmp;
+				}
+
+			}
+			
+			echo "<path d='m ".($x+10).",".($y+10)." 0,".(count($v)*20+15)."' />";
+			
+			$x+= $maxlen*14;  //strlen($text)*12*2; //12 font size //TODO: может по самому большому из детей ?
+			
+			
+		}
+		$title = "HEAD";
+		$x = $x / 2 - strlen($title)/2;
+		$y = 20;
+		echo "<text x='$x' y='$y'>HEAD</text>";
+		$y += 10;
+		$x += strlen($title)*12/2;
+		foreach($coor as $v){
+			echo "<path d='M ".$v[0].",".$v[1]." $x,$y' />";
+		}
+		
+	?>
+	</g>
+</svg>
