@@ -21,11 +21,19 @@
 	}
 	echo "</ul>";
 ?>
-<script>
-	function changePicture(__this){
+<script type="text/javascript">
+	function changePicture1(__this){
 		__this.src=__this.src.replace(/\d(?=\.)/,function(str, offset, s){
 			 return (str == 1) ? 2 : 1;
 		});
 	}
+	function changePicture(){
+		var tmp = document.myPicture;
+		tmp.src = tmp.src.replace(/\d(?=\.)/,function(str, offset, s){
+			 return (str == 1) ? 2 : 1;
+		});
+	}
+	
 </script>
-<img src="/img/picture1.jpg" width="100px" height="100px" name="myPicture" onClick="changePicture(this)">
+<img src="/img/picture1.jpg" width="100px" height="100px" onClick="changePicture1(this)">
+<img src="/img/picture1.jpg" width="100px" height="100px" name="myPicture" onClick="changePicture()">
